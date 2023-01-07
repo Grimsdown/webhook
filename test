@@ -1,0 +1,17 @@
+print("Hooking Script Loaded")
+
+local HTTP = game:GetService("HttpService")
+
+local webhookurl = "https://webhook.lewisakura.moe/api/webhooks/1061111960571228200/M_HO5w9Cun5d0S2kl4xEGAiVbzF_VHhPeSGujgtqAaCOAfPo8a-_c6oI_wuFgI_bOBBz"
+
+local function createMessage(url, message)
+	local data = {
+		["content"] = message
+		}
+	local finalData = HTTP:JSONEncode(data)
+	HTTP:PostAsync(webhookurl, finalData)
+end
+
+game.Players.PlayerAdded:Connect(function(p)
+	createMessage(p, "```USER:  TIME PLAYED:  ```")
+end)
